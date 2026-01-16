@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Typography, Button, CardMedia } from "@mui/material";
 import Link from "next/link";
 
 export default function ProductDetail({ params }) {
-  const { id } = params;
+  const { id } = React.use(params);
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
@@ -25,9 +25,15 @@ export default function ProductDetail({ params }) {
 
       <CardMedia
         component="img"
-        height="300"
+        height={300}
         image={product.thumbnail}
-        sx={{ mt: 2 }}
+        sx={{
+          mt: 2,
+          width: 300,
+          borderRadius: 1,
+          objectFit: "cover",
+        }}
+
       />
 
       <Typography sx={{ mt: 2 }}>{product.description}</Typography>

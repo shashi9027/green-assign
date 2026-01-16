@@ -1,11 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Typography, Button } from "@mui/material";
 import Link from "next/link";
 
 export default function UserDetail({ params }) {
-  const { id } = params;
+  const { id } = React.use(params);
   const [user, setUser] = useState(null);
 
   useEffect(() => {

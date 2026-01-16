@@ -23,7 +23,7 @@ const handler = NextAuth({
           );
          
 
-          if (res.data && res.data.token) {
+          if (res.data && res.data.accessToken) {
             return {
               id: res.data.id,
               name: res.data.firstName + " " + res.data.lastName,

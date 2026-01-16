@@ -1,26 +1,23 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { TextField, Button, Box, Typography } from "@mui/material";
-import { Router } from "next/router";
 
 export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
 
-  const res =  await signIn("credentials", {
+    await signIn("credentials", {
       username: form.get("username"),
       password: form.get("password"),
-      callbackUrl: "/dashboard",
+      callbackUrl: "/dashboard/users",
     });
-    if (res?.error) { 
-      console.log()
-    } 
+    
   };
 
   return (
     <Box sx={{ maxWidth: 400, mx: "auto", mt: 10 }}>
-      <Typography variant="h5" sx={{ mb: 2 }}>Admin Login</Typography>
+      <Typography variant="h5" sx={{ mb: 2 }}>Login!</Typography>
 
       <form onSubmit={handleLogin}>
         <TextField fullWidth name="username" label="Username" />

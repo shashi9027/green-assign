@@ -5,14 +5,17 @@ import { SessionProvider, useSession } from "next-auth/react";
 import { useAuthStore } from "../../store/authStore";
 
 function SyncAuth() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const setAuth = useAuthStore((state) => state.setAuth);
+  const clearAuth = useAuthStore((state) => state.clearAuth);
 
   useEffect(() => {
-    if (session?.user && session?.accessToken) {
-      setAuth(session.user, session.accessToken);
+    if (status === "authenticated") {
+      setAuth(session);        
+    } else if (status === "unauthenticated") {
+      clearAuth();
     }
-  }, [session, setAuth]);
+  }, [status, session, setAuth, clearAuth]);
 
   return null;
 }

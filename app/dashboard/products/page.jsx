@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState, useCallback } from "react";
-import { useProductStore } from "@/store/productStore";
+import { useProductStore } from "../../../store/productStore";
 import {
   Box, Grid, Card, CardContent, CardMedia,
-  TextField, MenuItem, Select, Pagination, Typography
+  TextField, MenuItem, Select, Pagination, Typography, Stack
 } from "@mui/material";
 import Link from "next/link";
 
@@ -58,13 +58,20 @@ export default function Products() {
           ))}
         </Select>
 
-        <button onClick={handleSearch}>Apply</button>
+        <button className="bg-blue-600 text-white px-4 py-2 rounded" onClick={handleSearch}>Apply</button>
       </Box>
 
       <Grid container spacing={2}>
         {products.map((p) => (
           <Grid item xs={12} sm={6} md={3} key={p.id}>
-            <Card>
+            <Card
+              sx={{
+                height: "100%",
+                width: "320px",
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Link href={`/dashboard/products/${p.id}`}>
                 <CardMedia
                   component="img"
@@ -72,15 +79,26 @@ export default function Products() {
                   image={p.thumbnail}
                 />
               </Link>
-              <CardContent>
-                <Typography variant="h6">{p.title}</Typography>
-                <Typography>₹ {p.price}</Typography>
-                <Typography>⭐ {p.rating}</Typography>
+
+              <CardContent
+                sx={{
+                  flexGrow: 1,
+                }}
+              >
+                <Typography variant="h6" noWrap>
+                  {p.title}
+                </Typography>
+                <Stack direction="row" spacing={2}>
+                  <Typography>₹ {p.price}</Typography>
+                  <Typography>⭐ {p.rating}</Typography>
+                </Stack>
+
               </CardContent>
             </Card>
           </Grid>
         ))}
       </Grid>
+
 
       <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
         <Pagination
