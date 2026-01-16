@@ -11,7 +11,6 @@ export default function Login() {
       username: form.get("username"),
       password: form.get("password"),
       callbackUrl: "/dashboard/users",
-      redirect:false
     });
     
   };
